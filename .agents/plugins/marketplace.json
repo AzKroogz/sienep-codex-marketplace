@@ -1,0 +1,20 @@
+{
+  "name": "sienep-equipo",
+  "interface": {
+    "displayName": "SIENEP Equipo 2026"
+  },
+  "plugins": [
+    {
+      "name": "sienep-defensa",
+      "source": {
+        "source": "local",
+        "path": "./plugins/sienep-defensa"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

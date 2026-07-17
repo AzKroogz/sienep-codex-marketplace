@@ -1,0 +1,25 @@
+{
+  "name": "sienep-defensa",
+  "version": "0.1.0",
+  "description": "Tutor compartido para estudiar y practicar la defensa SIENEP 2026 de infraestructura y programación.",
+  "author": {
+    "name": "Equipo SIENEP",
+    "url": "https://github.com/AzKroogz"
+  },
+  "repository": "https://github.com/AzKroogz/sienep-codex-marketplace",
+  "keywords": ["sienep", "utec", "gns3", "spring-boot", "defensa"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Defensa SIENEP 2026",
+    "shortDescription": "Tutor de infraestructura y programación SIENEP.",
+    "longDescription": "Ayuda al equipo a comprender, demostrar y defender la infraestructura GNS3 y el backend Spring Boot de SIENEP 2026.",
+    "developerName": "Equipo SIENEP",
+    "category": "Education",
+    "capabilities": ["Interactive"],
+    "defaultPrompt": [
+      "Examiname sobre infraestructura SIENEP.",
+      "Enseñame la defensa del backend SIENEP.",
+      "Hagamos un simulacro 70% infra y 30% programación."
+    ]
+  }
+}

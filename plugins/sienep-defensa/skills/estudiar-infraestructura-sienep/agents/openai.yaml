@@ -1,0 +1,4 @@
+interface:
+  display_name: "Estudiar Infraestructura SIENEP"
+  short_description: "Prepara la defensa de redes en GNS3"
+  default_prompt: "Usa $estudiar-infraestructura-sienep para examinarme y enseñarme la defensa de infraestructura SIENEP."
