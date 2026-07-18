@@ -9,7 +9,7 @@ description: Enseñar, examinar y preparar la defensa académica de infraestruct
 
 Leer [references/guia-infraestructura.md](references/guia-infraestructura.md) antes de enseñar o evaluar. Tratar el estado de la maqueta como histórico: pedir evidencia actual cuando una respuesta dependa de una configuración concreta.
 
-Respetar los appliances reales del proyecto. No convertir automáticamente un nodo llamado `SwL3-*` en un switch multicapa con SVIs: varios son appliances Cisco IOU/IOL de routing que realizan router-on-a-stick mediante subinterfaces 802.1Q.
+Respetar los appliances reales del proyecto. En `maqueta1-1`, todos los nodos existentes cuyo nombre sigue el patrón `SwL3-*` son appliances Cisco IOU/IOL L3. No describirlos como switches multicapa físicos con SVIs: realizan routing mediante interfaces o subinterfaces 802.1Q según el enlace y el sitio.
 
 ## Elegir el modo
 
