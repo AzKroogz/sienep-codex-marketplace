@@ -9,6 +9,7 @@
 5. Preguntas docentes
 6. Riesgos históricos
 7. Banco ampliado de preguntas
+8. Plan de cierre
 
 ## Escenario
 
@@ -21,6 +22,25 @@ El campus SIENEP se representa con cinco sitios interconectados:
 - E: anfiteatro, eventos e IoT.
 
 La defensa debe justificar disponibilidad, seguridad, segmentación y escalabilidad. El archivo portable de GNS3 y el video son excluyentes según la pauta resumida por el equipo.
+
+### Alcance normativo y entregables
+
+No confundir tres categorías: **obligatorio** es un requisito de la pauta;
+**recomendado** mejora la solución pero no debe presentarse como requisito; y
+**meta de nivel** indica qué debe integrarse para aspirar a esa calificación. Los
+niveles son acumulativos: un nivel superior conserva los requisitos de los
+anteriores.
+
+| Alcance | Obligatorio o meta acumulativa | Entregable y evidencia operativa |
+|---|---|---|
+| General | Diseñar el direccionamiento con VLSM, incorporar IPv6 y separar los servicios expuestos en una zona DMZ de la LAN interna. La DMZ es requisito de topología, no una recomendación. | Tabla de subredes coherente con la maqueta; `show ip route`, `show ipv6 route`, una prueba de acceso autorizado hacia un servicio de la DMZ y un intento no autorizado desde la DMZ hacia la LAN interna que resulte denegado. |
+| Nivel 3 | Demostrar el núcleo de VLAN/trunks, routing, seguridad y servicios; Rapid-PVST+ (STP) es requisito de este nivel. | Estado de VLAN/trunks/STP y conectividad o rechazo esperado; incluir una falla de enlace y observar reconvergencia. |
+| Nivel 4 | Integrar y documentar el alcance previo. La documentación en Excel es obligatoria para este nivel. | Libro Excel con inventario, direccionamiento/VLSM, VLAN, enlaces y plan de pruebas; además, archivos `.txt` de configuración de los equipos requeridos, saneados y trazables al appliance. La documentación no sustituye las pruebas en vivo. |
+| Nivel 5 | Defender de forma integrada disponibilidad, políticas, servicios y recuperación, justificando decisiones y verificando el comportamiento ante fallas. | Guion reproducible con estado antes/durante/después, resultados esperados, recuperación comprobada y los entregables acumulados. |
+
+La autenticación de vecinos OSPF es **opcional/recomendada** como
+endurecimiento; si se adopta, hay que demostrar vecindad válida y rechazo o
+pérdida de adyacencia ante credenciales incompatibles sin revelar secretos.
 
 ## Núcleo obligatorio
 
@@ -142,6 +162,17 @@ Comandos: `show ip nat translations`, `show ip nat statistics`, `show ip route`.
 | IP SLA + tracking | pérdida de alcance hacia Internet |
 | Ruta flotante | necesidad de un camino de respaldo |
 
+### Disponibilidad de servidores
+
+La redundancia de gateway y la de servidor resuelven fallas distintas. HSRP
+mantiene un gateway virtual para los hosts; no mantiene disponible una
+aplicación. En servidores, **bonding** agrupa interfaces para tolerar la caída de
+un enlace y **Keepalived** puede mover una IP virtual entre nodos. Bonding y
+Keepalived son una recomendación de disponibilidad, no un requisito general.
+Para sostener la afirmación hay que cortar el enlace o detener el nodo activo,
+observar la IP/rol y el servicio desde un cliente, y luego restaurar y comprobar
+la recuperación.
+
 ## Seguridad y servicios
 
 ### ACL
@@ -181,6 +212,25 @@ Explicar direcciones globales y link-local, Neighbor Discovery, ausencia de broa
 
 ## Evidencias
 
+### Control inicial de la maqueta
+
+Registrar el modelo o la imagen y la función de cada appliance relevante; no
+inferir capacidades solo por el ícono o por una configuración guardada. En cada
+router o switch comprobar la presencia de `hostname`, banner legal, contraseña
+de consola, contraseña o autenticación de VTY y `enable secret`, sin exhibir
+credenciales. Separar siempre:
+
+- **presencia de configuración**: aparece en la configuración saneada;
+- **estado operativo**: la interfaz, vecindad, rol o servicio está activo;
+- **evidencia actual**: una salida y una prueba tomadas en la sesión vigente.
+
+Para una prueba extremo a extremo, seguir cuatro puntos de control:
+
+1. **Origen:** confirmar el tráfico emitido por el cliente y sus parámetros.
+2. **Gateway de origen:** comprobar la entrada y la decisión de routing o política.
+3. **Borde o tránsito:** comprobar la salida y, cuando corresponda, la traducción NAT.
+4. **Destino:** confirmar tráfico recibido o el rechazo esperado.
+
 Para cada demostración usar esta secuencia:
 
 1. mostrar estado inicial;
@@ -190,6 +240,13 @@ Para cada demostración usar esta secuencia:
 5. provocar la falla si corresponde;
 6. comprobar convergencia;
 7. restaurar y verificar.
+
+Una prueba puede cubrir varios criterios si se declara qué evidencia corresponde
+a cada uno y se conserva trazabilidad. Para NAT, elegir una traducción
+representativa: estado/ruta antes, tráfico que cree la entrada, traducción y
+contadores durante, y limpieza o recuperación después. No repetir pings ni
+traducciones equivalentes si no prueban una política, protocolo o camino
+distinto.
 
 Pruebas fuertes: ping permitido/bloqueado, DHCP remoto, traducción NAT, vecino OSPF, failover HSRP, miembro LACP caído, enlace del anillo caído, SSH desde MGMT y denegación desde Guest.
 
@@ -205,6 +262,13 @@ Pruebas fuertes: ping permitido/bloqueado, DHCP remoto, traducción NAT, vecino 
 8. ¿Por qué DHCP necesita relay?
 9. ¿Cómo comparten Internet muchos hosts con una IP?
 10. ¿Qué demuestra un contador QoS en cero?
+11. ¿Por qué VLSM y una DMZ son decisiones distintas aunque ambas afecten el diseño IP?
+12. ¿Qué salida permite distinguir una configuración OSPF presente de una adyacencia operativa?
+13. ¿Cómo demostraría la reconvergencia de STP sin confundirla con el failover del gateway HSRP?
+14. ¿Qué falla cubre bonding y cuál Keepalived? Diseñe una prueba antes/durante/después.
+15. ¿Qué observa en cada uno de los cuatro puntos de control cuando una ACL bloquea el flujo?
+16. ¿Qué evidencia mínima conservaría en Excel y en los `.txt`, y cuál todavía debe mostrarse en vivo?
+17. ¿Cómo elegir una única prueba NAT que sea económica pero mantenga trazabilidad?
 
 ## Banco ampliado de preguntas
 
@@ -250,9 +314,33 @@ Pruebas fuertes: ping permitido/bloqueado, DHCP remoto, traducción NAT, vecino 
 
 ## Riesgos históricos
 
-Verificar antes de afirmar que siguen vigentes:
+Esta matriz resume observaciones **históricas**, no el estado actual. Toda defensa
+debe obtener evidencia nueva antes de afirmar que una capacidad continúa
+operativa.
 
-- una ACL Guest tuvo un `permit any` demasiado temprano;
-- una ACL IoT permitió más destinos de los requeridos;
-- QoS mostró marcado, pero faltó tráfico coincidente/prioridad efectiva;
-- quedaron pendientes wireless, alta densidad, redundancia de servidor y algunos servicios.
+| Estado histórico | Capacidad u observación | Evidencia actual requerida |
+|---|---|---|
+| Demostrado históricamente | Existieron capacidades del núcleo y HSRP estuvo implementado. | Repetir estado y failover: `show standby brief`, caída controlada del activo, continuidad desde cliente, restauración y recuperación. HSRP sigue pendiente de evidencia final actual. |
+| Observado con brechas | Una ACL Guest tuvo un `permit any` demasiado temprano; una ACL IoT permitió más destinos de los requeridos; QoS mostró marcado sin tráfico coincidente/prioridad efectiva. STP estaba presente, pero faltó demostrar su reconvergencia. La configuración básica de appliances no quedó demostrada de forma completa. Keepalived/bonding quedó con brecha en el failover de servidor. | Leer contadores y flujos permitido/denegado; generar tráfico QoS coincidente; cortar un enlace STP y medir la recuperación; mostrar saneados `hostname`, banner, consola, VTY y `enable secret`; provocar y revertir el failover Keepalived/bonding manteniendo el servicio. |
+| Pendiente de evidencia actual | IPv6 fue requisito general con evidencia histórica pendiente; también quedaron pendientes wireless, alta densidad, redundancia de servidor y algunos servicios. | Para IPv6, verificar interfaces/rutas y conectividad extremo a extremo. Para el resto, definir estado inicial, estímulo, salida observable, resultado esperado y recuperación antes de atribuir cumplimiento. |
+
+## Plan de cierre
+
+Priorizar primero lo que bloquea la evaluación o las pruebas posteriores, sin
+convertir el registro histórico en estado vigente:
+
+1. **Preparación operativa, no requisito normativo:** inventariar modelo/imagen
+   y validar la configuración básica para que las evidencias sean trazables.
+   Resultado: cada prueba identifica el appliance y parte de un estado conocido.
+2. **Base obligatoria:** cerrar VLSM, DMZ e IPv6. Resultado: subredes sin solape,
+   acceso autorizado a servicios DMZ, flujo DMZ hacia LAN interna denegado y
+   conectividad IPv6 verificable.
+3. **Nivel 3:** probar reconvergencia STP. Resultado: camino alternativo activo y
+   conectividad recuperada tras una falla controlada.
+4. **Disponibilidad:** revalidar HSRP y luego, como recomendación independiente,
+   bonding/Keepalived. Resultado: gateway y servicio sobreviven sus fallas
+   respectivas y recuperan el estado restaurado.
+5. **Nivel 4 y cierre documental:** completar Excel y `.txt` saneados, cotejarlos
+   con la maqueta y enlazar cada fila del plan con una evidencia viva.
+6. **Ensayo de nivel 5:** ejecutar el guion económico completo, registrar antes,
+   durante y después, y eliminar repeticiones NAT que no agreguen cobertura.
