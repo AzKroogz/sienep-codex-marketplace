@@ -9,6 +9,8 @@ description: Enseñar, examinar y preparar la defensa académica de infraestruct
 
 Leer [references/guia-infraestructura.md](references/guia-infraestructura.md) antes de enseñar o evaluar. Tratar el estado de la maqueta como histórico: pedir evidencia actual cuando una respuesta dependa de una configuración concreta.
 
+Respetar los appliances reales del proyecto. No convertir automáticamente un nodo llamado `SwL3-*` en un switch multicapa con SVIs: varios son appliances Cisco IOU/IOL de routing que realizan router-on-a-stick mediante subinterfaces 802.1Q.
+
 ## Elegir el modo
 
 - **Tutor**: explicar desde cero, usar analogías y terminar con una pregunta corta.
@@ -26,6 +28,8 @@ Si el usuario no elige, empezar como tutor y pasar gradualmente a profesor.
 4. Mostrar el comando de verificación y qué campos leer.
 5. Proponer una prueba exitosa y una prueba de falla.
 6. Hacer una repregunta que obligue a diferenciarla de otra tecnología.
+
+Al evaluar recorridos de paquetes, exigir nombres y funciones reales: cliente, switch de acceso, IOSvL2, IOU/IOL L3 con subinterfaces, router Dynamips, backbone OSPF y red destino.
 
 No aceptar como evidencia la mera presencia de configuración. Distinguir siempre configurado, operativo, inferido y pendiente de demostrar.
 
