@@ -14,8 +14,8 @@ qué evidencia o entregable debe presentarse.
 **Criterios de éxito:**
 
 - presenta una matriz o comparación inequívoca por nivel;
-- clasifica VLSM, DMZ y autenticación OSPF sin confundir obligación,
-  recomendación y objetivo de nivel superior;
+- clasifica VLSM como requisito general obligatorio, una zona DMZ como requisito
+  obligatorio de la topología y la autenticación OSPF como opcional/recomendada;
 - identifica Excel como documentación obligatoria para nivel 4 y menciona los
   archivos de configuración requeridos;
 - propone al menos una evidencia operativa, además del entregable documental.
@@ -28,9 +28,13 @@ configuración básica debe comprobarse antes de evaluar las funciones de red.
 
 **Criterios de éxito:**
 
-- enumera los cuatro puntos de control con su propósito observable;
+- enumera y nombra los cuatro puntos de control del recorrido: origen (tráfico
+  emitido por el cliente), gateway de origen (entrada y decisión de
+  routing/política), borde o tránsito (salida y, si corresponde, traducción NAT)
+  y destino (tráfico recibido o rechazo esperado);
 - exige identificar el modelo o imagen de cada appliance relevante;
-- recupera la configuración básica que debe revisarse;
+- comprueba como configuración básica concreta `hostname`, banner legal,
+  contraseña de consola, contraseña o autenticación de VTY y `enable secret`;
 - distingue presencia de configuración, estado operativo y evidencia actual.
 
 ## Escenario 3: estado histórico y disponibilidad
@@ -65,16 +69,23 @@ repetir pruebas equivalentes, especialmente las de NAT.
 
 ## Escenario 5: brechas finales y plan de cierre
 
-**Consulta:** Identificá las brechas finales que pueden afectar la defensa y
-armá un plan de cierre priorizado. Incluí STP, IPv6, HSRP, Keepalived, Excel y
-configuración básica de appliances.
+**Consulta:** Identificá los requisitos, entregables, recomendaciones y brechas
+históricas que pueden afectar la defensa y armá un plan de cierre priorizado.
+Incluí STP, IPv6, HSRP, Keepalived, Excel y configuración básica de appliances.
 
 **Criterios de éxito:**
 
-- recupera las seis brechas solicitadas sin presentar como actual un dato
-  histórico;
-- asigna a cada brecha una evidencia verificable y un resultado esperado;
-- diferencia requisitos de nivel, recomendaciones y pendientes técnicos;
+- clasifica STP como requisito de nivel 3 con una brecha histórica en su prueba
+  de reconvergencia, e IPv6 como requisito general con evidencia histórica
+  pendiente;
+- clasifica HSRP como capacidad implementada históricamente pero pendiente de
+  evidencia final, y Keepalived como recomendación de disponibilidad de
+  servidores con brecha histórica en la demostración de failover;
+- clasifica Excel como entregable obligatorio de nivel 4 y la configuración
+  básica de appliances como brecha histórica de demostración que debe cubrir
+  `hostname`, banner, consola, VTY y `enable secret`;
+- asigna a cada elemento una evidencia verificable y un resultado esperado sin
+  presentar como actual un dato histórico;
 - prioriza por impacto en evaluación y dependencia para la demostración.
 
 ## Línea base contra la guía anterior
