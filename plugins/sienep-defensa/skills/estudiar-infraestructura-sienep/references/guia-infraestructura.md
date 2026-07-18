@@ -162,16 +162,21 @@ Comandos: `show ip nat translations`, `show ip nat statistics`, `show ip route`.
 | IP SLA + tracking | pérdida de alcance hacia Internet |
 | Ruta flotante | necesidad de un camino de respaldo |
 
-### Disponibilidad de servidores
+### Alcance real de los servidores
 
-La redundancia de gateway y la de servidor resuelven fallas distintas. HSRP
-mantiene un gateway virtual para los hosts; no mantiene disponible una
-aplicación. En servidores, **bonding** agrupa interfaces para tolerar la caída de
-un enlace y **Keepalived** puede mover una IP virtual entre nodos. Bonding y
-Keepalived son una recomendación de disponibilidad, no un requisito general.
-Para sostener la afirmación hay que cortar el enlace o detener el nodo activo,
-observar la IP/rol y el servicio desde un cliente, y luego restaurar y comprobar
-la recuperación.
+HSRP mantiene un gateway virtual para los hosts; no mantiene disponible una
+aplicación. En esta maqueta, los dos servidores cumplen funciones diferentes y
+no constituyen un par activo/pasivo. **No se implementaron Keepalived ni
+failover entre servidores** porque el alcance es reducido y la RAM disponible
+no permite sumar nodos equivalentes. Si existe bonding en un servidor, protege
+sus interfaces o enlaces; no replica la función ni mueve el servicio al otro
+nodo.
+
+Esta es una decisión de alcance que debe explicarse con honestidad, no una
+capacidad pendiente de demostrar ni una recomendación de cierre. Si la pauta
+pregunta por tolerancia a fallos de servidor, reconocer la limitación: la
+maqueta no demuestra continuidad del mismo servicio ante la caída de un nodo.
+No atribuir redundancia solo por tener dos servidores con roles distintos.
 
 ## Seguridad y servicios
 
@@ -265,7 +270,7 @@ Pruebas fuertes: ping permitido/bloqueado, DHCP remoto, traducción NAT, vecino 
 11. ¿Por qué VLSM y una DMZ son decisiones distintas aunque ambas afecten el diseño IP?
 12. ¿Qué salida permite distinguir una configuración OSPF presente de una adyacencia operativa?
 13. ¿Cómo demostraría la reconvergencia de STP sin confundirla con el failover del gateway HSRP?
-14. ¿Qué falla cubre bonding y cuál Keepalived? Diseñe una prueba antes/durante/después.
+14. ¿Por qué tener dos servidores con funciones diferentes no demuestra redundancia ni failover?
 15. ¿Qué observa en cada uno de los cuatro puntos de control cuando una ACL bloquea el flujo?
 16. ¿Qué evidencia mínima conservaría en Excel y en los `.txt`, y cuál todavía debe mostrarse en vivo?
 17. ¿Cómo elegir una única prueba NAT que sea económica pero mantenga trazabilidad?
@@ -321,8 +326,9 @@ operativa.
 | Estado histórico | Capacidad u observación | Evidencia actual requerida |
 |---|---|---|
 | Demostrado históricamente | Existieron capacidades del núcleo y HSRP estuvo implementado. | Repetir estado y failover: `show standby brief`, caída controlada del activo, continuidad desde cliente, restauración y recuperación. HSRP sigue pendiente de evidencia final actual. |
-| Observado con brechas | Una ACL Guest tuvo un `permit any` demasiado temprano; una ACL IoT permitió más destinos de los requeridos; QoS mostró marcado sin tráfico coincidente/prioridad efectiva. STP estaba presente, pero faltó demostrar su reconvergencia. La configuración básica de appliances no quedó demostrada de forma completa. Keepalived/bonding quedó con brecha en el failover de servidor. | Leer contadores y flujos permitido/denegado; generar tráfico QoS coincidente; cortar un enlace STP y medir la recuperación; mostrar saneados `hostname`, banner, consola, VTY y `enable secret`; provocar y revertir el failover Keepalived/bonding manteniendo el servicio. |
-| Pendiente de evidencia actual | IPv6 fue requisito general con evidencia histórica pendiente; también quedaron pendientes wireless, alta densidad, redundancia de servidor y algunos servicios. | Para IPv6, verificar interfaces/rutas y conectividad extremo a extremo. Para el resto, definir estado inicial, estímulo, salida observable, resultado esperado y recuperación antes de atribuir cumplimiento. |
+| Observado con brechas | Una ACL Guest tuvo un `permit any` demasiado temprano; una ACL IoT permitió más destinos de los requeridos; QoS mostró marcado sin tráfico coincidente/prioridad efectiva. STP estaba presente, pero faltó demostrar su reconvergencia. La configuración básica de appliances no quedó demostrada de forma completa. | Leer contadores y flujos permitido/denegado; generar tráfico QoS coincidente; cortar un enlace STP y medir la recuperación; mostrar saneados `hostname`, banner, consola, VTY y `enable secret`. |
+| Limitación conocida | Los dos servidores cumplen funciones diferentes. No existe Keepalived ni failover entre nodos por límites de RAM y alcance. Un bonding, si está operativo, solo protege interfaces del mismo servidor. | Mostrar la función real de cada servidor y explicar que dos roles distintos no aportan continuidad del mismo servicio. No simular ni prometer una prueba de failover inexistente. Verificar bonding por separado antes de atribuir redundancia de enlace. |
+| Pendiente de evidencia actual | IPv6 fue requisito general con evidencia histórica pendiente; también quedaron pendientes wireless, alta densidad y algunos servicios. | Para IPv6, verificar interfaces/rutas y conectividad extremo a extremo. Para el resto, definir estado inicial, estímulo, salida observable, resultado esperado y recuperación antes de atribuir cumplimiento. |
 
 ## Plan de cierre
 
@@ -337,9 +343,10 @@ convertir el registro histórico en estado vigente:
    conectividad IPv6 verificable.
 3. **Nivel 3:** probar reconvergencia STP. Resultado: camino alternativo activo y
    conectividad recuperada tras una falla controlada.
-4. **Disponibilidad:** revalidar HSRP y luego, como recomendación independiente,
-   bonding/Keepalived. Resultado: gateway y servicio sobreviven sus fallas
-   respectivas y recuperan el estado restaurado.
+4. **Disponibilidad:** revalidar HSRP para el gateway. Documentar por separado
+   que los servidores tienen roles distintos y no ofrecen failover por límites
+   de RAM y alcance; no incluir Keepalived como tarea de cierre. Tratar bonding,
+   si existe, solo como redundancia de interfaces del mismo servidor.
 5. **Nivel 4 y cierre documental:** completar Excel y `.txt` saneados, cotejarlos
    con la maqueta y enlazar cada fila del plan con una evidencia viva.
 6. **Ensayo de nivel 5:** ejecutar el guion económico completo, registrar antes,
