@@ -43,15 +43,17 @@ configuración básica debe comprobarse antes de evaluar las funciones de red.
 
 **Consulta:** Resumí qué capacidades de la maqueta fueron demostradas, cuáles
 se observaron con brechas y cuáles siguen pendientes de verificación. Incluí
-HSRP, STP, IPv6 y disponibilidad de servidores con bonding y Keepalived.
+HSRP, STP, IPv6 y el alcance real de los dos servidores.
 
 **Criterios de éxito:**
 
 - separa demostrado, observado con brechas y pendiente de verificar;
 - etiqueta el estado como histórico y pide evidencia actual antes de afirmar
   que una capacidad continúa operativa;
-- diferencia la redundancia de gateway de HSRP de la disponibilidad de servidor
-  mediante bonding y Keepalived;
+- explica que HSRP protege el gateway, mientras que los dos servidores cumplen
+  funciones diferentes y no forman un par redundante;
+- registra que Keepalived no está implementado por límites de RAM y alcance, sin
+  convertir esa decisión en una brecha pendiente;
 - incluye una prueba operativa o de falla para la afirmación principal.
 
 ## Escenario 4: guion de defensa sin repeticiones
@@ -73,7 +75,8 @@ repetir pruebas equivalentes, especialmente las de NAT.
 
 **Consulta:** Identificá los requisitos, entregables, recomendaciones y brechas
 históricas que pueden afectar la defensa y armá un plan de cierre priorizado.
-Incluí STP, IPv6, HSRP, Keepalived, Excel y configuración básica de appliances.
+Incluí STP, IPv6, HSRP, el alcance de servidores, Excel y configuración básica
+de appliances.
 
 **Criterios de éxito:**
 
@@ -81,8 +84,11 @@ Incluí STP, IPv6, HSRP, Keepalived, Excel y configuración básica de appliance
   de reconvergencia, e IPv6 como requisito general con evidencia histórica
   pendiente;
 - clasifica HSRP como capacidad implementada históricamente pero pendiente de
-  evidencia final, y Keepalived como recomendación de disponibilidad de
-  servidores con brecha histórica en la demostración de failover;
+  evidencia final, y documenta la ausencia intencional de Keepalived porque los
+  servidores tienen funciones diferentes y no hay RAM para sumar nodos;
+- no presenta Keepalived ni failover entre servidores como requisito,
+  recomendación de cierre o brecha histórica del proyecto; distingue cualquier
+  bonding de interfaces de una redundancia entre nodos;
 - clasifica Excel como entregable obligatorio de nivel 4 y la configuración
   básica de appliances como brecha histórica de demostración que debe cubrir
   `hostname`, banner, consola, VTY y `enable secret`;
@@ -104,13 +110,13 @@ los PDF fuente ni conocimiento externo para completar ausencias.
 |---|---|---|---|
 | 1. Niveles 3–5 | Permite describir el núcleo obligatorio y algunas evidencias generales. | No define una matriz por nivel, VLSM, DMZ, autenticación OSPF, Excel obligatorio para nivel 4 ni archivos de configuración. | Falla |
 | 2. Puntos de control | Aporta comandos de verificación y una secuencia general de evidencia. | No enumera cuatro puntos de control, modelos de appliances ni su configuración básica. | Falla |
-| 3. Estado histórico | Advierte que ciertos riesgos son históricos y menciona HSRP, STP e IPv6 de forma conceptual. | No clasifica capacidades por estado ni explica bonding o Keepalived para disponibilidad de servidores. | Falla |
+| 3. Estado histórico | Advierte que ciertos riesgos son históricos y menciona HSRP, STP e IPv6 de forma conceptual. | No clasifica capacidades por estado ni documenta el alcance real de los dos servidores no redundantes. | Falla |
 | 4. Guion eficiente | Ofrece una secuencia de siete pasos para una demostración y exige restaurar y verificar. | No propone economía de demostraciones ni evita explícitamente repeticiones equivalentes de NAT. | Falla |
-| 5. Brechas finales | Enumera algunos riesgos históricos y pendientes generales. | No recupera como conjunto STP, IPv6, HSRP, Keepalived, Excel y configuración básica de appliances, ni los vincula con nivel y plan de cierre. | Falla |
+| 5. Brechas finales | Enumera algunos riesgos históricos y pendientes generales. | No recupera como conjunto STP, IPv6, HSRP, alcance de servidores, Excel y configuración básica de appliances, ni los vincula con nivel y plan de cierre. | Falla |
 
 **Confirmación RED:** los cinco escenarios fallan al menos un criterio. La línea
 base omite todos los indicadores mínimos señalados por el plan: matriz por
-nivel, cuatro puntos de control, Keepalived, Excel obligatorio para nivel 4 y
+nivel, cuatro puntos de control, alcance de servidores, Excel obligatorio para nivel 4 y
 configuración básica de appliances.
 
 ## Resultado GREEN contra la guía ampliada
@@ -122,9 +128,9 @@ exclusivamente con la guía ampliada.
 |---|---|---|
 | 1. Niveles 3–5 | Matriz y clasificación normativa; VLSM, DMZ, OSPF, Excel/`.txt`, evidencia operativa y denegación DMZ hacia LAN interna. | GREEN |
 | 2. Puntos de control | Cuatro controles, modelo/imagen, cinco comprobaciones básicas y distinción entre configuración, operación y evidencia actual. | GREEN |
-| 3. Estado histórico | Tres estados históricos, cautela de vigencia, HSRP frente a bonding/Keepalived y prueba de falla. | GREEN |
+| 3. Estado histórico | Tres estados históricos, cautela de vigencia, HSRP y alcance real de dos servidores no redundantes. | GREEN |
 | 4. Guion eficiente | Antes/durante/después, reutilización trazable, economía NAT, restauración y recuperación. | GREEN |
-| 5. Brechas finales | Clasificaciones y evidencias para STP, IPv6, HSRP, Keepalived, Excel y appliances; el control de appliances queda explícitamente no normativo. | GREEN |
+| 5. Brechas finales | Clasificaciones y evidencias para STP, IPv6, HSRP, Excel y appliances; Keepalived queda fuera del cierre por decisión de alcance. | GREEN |
 
 **Confirmación GREEN:** los cinco escenarios recuperan todos sus criterios sin
 convertir recomendaciones o controles preparatorios en requisitos obligatorios
