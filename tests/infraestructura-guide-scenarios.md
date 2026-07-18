@@ -18,7 +18,9 @@ qué evidencia o entregable debe presentarse.
   obligatorio de la topología y la autenticación OSPF como opcional/recomendada;
 - identifica Excel como documentación obligatoria para nivel 4 y menciona los
   archivos de configuración requeridos;
-- propone al menos una evidencia operativa, además del entregable documental.
+- propone al menos una evidencia operativa, además del entregable documental,
+  e identifica explícitamente como flujo denegado el acceso no autorizado desde
+  la DMZ hacia la LAN interna.
 
 ## Escenario 2: cuatro puntos de control y appliances
 
@@ -84,6 +86,8 @@ Incluí STP, IPv6, HSRP, Keepalived, Excel y configuración básica de appliance
 - clasifica Excel como entregable obligatorio de nivel 4 y la configuración
   básica de appliances como brecha histórica de demostración que debe cubrir
   `hostname`, banner, consola, VTY y `enable secret`;
+- no presenta el inventario ni la comprobación básica de appliances como
+  requisitos normativos de la pauta;
 - asigna a cada elemento una evidencia verificable y un resultado esperado sin
   presentar como actual un dato histórico;
 - prioriza por impacto en evaluación y dependencia para la demostración.
@@ -108,3 +112,20 @@ los PDF fuente ni conocimiento externo para completar ausencias.
 base omite todos los indicadores mínimos señalados por el plan: matriz por
 nivel, cuatro puntos de control, Keepalived, Excel obligatorio para nivel 4 y
 configuración básica de appliances.
+
+## Resultado GREEN contra la guía ampliada
+
+Fecha de ejecución: 2026-07-17. Se conservaron las consultas y se contrastaron
+exclusivamente con la guía ampliada.
+
+| Escenario | Recuperación confirmada | Resultado |
+|---|---|---|
+| 1. Niveles 3–5 | Matriz y clasificación normativa; VLSM, DMZ, OSPF, Excel/`.txt`, evidencia operativa y denegación DMZ hacia LAN interna. | GREEN |
+| 2. Puntos de control | Cuatro controles, modelo/imagen, cinco comprobaciones básicas y distinción entre configuración, operación y evidencia actual. | GREEN |
+| 3. Estado histórico | Tres estados históricos, cautela de vigencia, HSRP frente a bonding/Keepalived y prueba de falla. | GREEN |
+| 4. Guion eficiente | Antes/durante/después, reutilización trazable, economía NAT, restauración y recuperación. | GREEN |
+| 5. Brechas finales | Clasificaciones y evidencias para STP, IPv6, HSRP, Keepalived, Excel y appliances; el control de appliances queda explícitamente no normativo. | GREEN |
+
+**Confirmación GREEN:** los cinco escenarios recuperan todos sus criterios sin
+convertir recomendaciones o controles preparatorios en requisitos obligatorios
+ni presentar observaciones históricas como estado actual.

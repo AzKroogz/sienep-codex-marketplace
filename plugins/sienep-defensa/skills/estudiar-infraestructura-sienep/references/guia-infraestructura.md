@@ -33,7 +33,7 @@ anteriores.
 
 | Alcance | Obligatorio o meta acumulativa | Entregable y evidencia operativa |
 |---|---|---|
-| General | Diseñar el direccionamiento con VLSM, incorporar IPv6 y separar los servicios expuestos en una zona DMZ de la LAN interna. La DMZ es requisito de topología, no una recomendación. | Tabla de subredes coherente con la maqueta; `show ip route`, `show ipv6 route` y una prueba de acceso permitido a DMZ junto con un intento interno denegado. |
+| General | Diseñar el direccionamiento con VLSM, incorporar IPv6 y separar los servicios expuestos en una zona DMZ de la LAN interna. La DMZ es requisito de topología, no una recomendación. | Tabla de subredes coherente con la maqueta; `show ip route`, `show ipv6 route`, una prueba de acceso autorizado hacia un servicio de la DMZ y un intento no autorizado desde la DMZ hacia la LAN interna que resulte denegado. |
 | Nivel 3 | Demostrar el núcleo de VLAN/trunks, routing, seguridad y servicios; Rapid-PVST+ (STP) es requisito de este nivel. | Estado de VLAN/trunks/STP y conectividad o rechazo esperado; incluir una falla de enlace y observar reconvergencia. |
 | Nivel 4 | Integrar y documentar el alcance previo. La documentación en Excel es obligatoria para este nivel. | Libro Excel con inventario, direccionamiento/VLSM, VLAN, enlaces y plan de pruebas; además, archivos `.txt` de configuración de los equipos requeridos, saneados y trazables al appliance. La documentación no sustituye las pruebas en vivo. |
 | Nivel 5 | Defender de forma integrada disponibilidad, políticas, servicios y recuperación, justificando decisiones y verificando el comportamiento ante fallas. | Guion reproducible con estado antes/durante/después, resultados esperados, recuperación comprobada y los entregables acumulados. |
@@ -329,15 +329,18 @@ operativa.
 Priorizar primero lo que bloquea la evaluación o las pruebas posteriores, sin
 convertir el registro histórico en estado vigente:
 
-1. **Base obligatoria:** inventariar modelo/imagen y validar configuración básica;
-   cerrar VLSM, DMZ e IPv6. Resultado: inventario trazable, subredes sin solape,
-   DMZ aislada y conectividad IPv6 verificable.
-2. **Nivel 3:** probar reconvergencia STP. Resultado: camino alternativo activo y
+1. **Preparación operativa, no requisito normativo:** inventariar modelo/imagen
+   y validar la configuración básica para que las evidencias sean trazables.
+   Resultado: cada prueba identifica el appliance y parte de un estado conocido.
+2. **Base obligatoria:** cerrar VLSM, DMZ e IPv6. Resultado: subredes sin solape,
+   acceso autorizado a servicios DMZ, flujo DMZ hacia LAN interna denegado y
+   conectividad IPv6 verificable.
+3. **Nivel 3:** probar reconvergencia STP. Resultado: camino alternativo activo y
    conectividad recuperada tras una falla controlada.
-3. **Disponibilidad:** revalidar HSRP y luego, como recomendación independiente,
+4. **Disponibilidad:** revalidar HSRP y luego, como recomendación independiente,
    bonding/Keepalived. Resultado: gateway y servicio sobreviven sus fallas
    respectivas y recuperan el estado restaurado.
-4. **Nivel 4 y cierre documental:** completar Excel y `.txt` saneados, cotejarlos
+5. **Nivel 4 y cierre documental:** completar Excel y `.txt` saneados, cotejarlos
    con la maqueta y enlazar cada fila del plan con una evidencia viva.
-5. **Ensayo de nivel 5:** ejecutar el guion económico completo, registrar antes,
+6. **Ensayo de nivel 5:** ejecutar el guion económico completo, registrar antes,
    durante y después, y eliminar repeticiones NAT que no agreguen cobertura.

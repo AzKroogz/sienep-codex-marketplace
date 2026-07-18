@@ -87,7 +87,7 @@ git commit -m "docs: enrich SIENEP infrastructure defense guide"
 ### Task 3: Validar y publicar
 
 **Files:**
-- Verify: `.codex-plugin/plugin.json`
+- Verify: `plugins/sienep-defensa/.codex-plugin/plugin.json`
 - Verify: `plugins/sienep-defensa/skills/estudiar-infraestructura-sienep/SKILL.md`
 - Verify: `plugins/sienep-defensa/skills/estudiar-infraestructura-sienep/references/guia-infraestructura.md`
 
@@ -99,7 +99,7 @@ git commit -m "docs: enrich SIENEP infrastructure defense guide"
 
 ```bash
 git diff --check origin/main...HEAD
-python3 -m json.tool .codex-plugin/plugin.json
+python3 -m json.tool plugins/sienep-defensa/.codex-plugin/plugin.json
 ```
 
 Resultado esperado: cero errores y JSON válido.
