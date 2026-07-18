@@ -28,6 +28,7 @@ La defensa debe justificar disponibilidad, seguridad, segmentación y escalabili
 
 No deducir la función únicamente por el nombre mostrado en GNS3. Inventario histórico verificado:
 
+- Todos los nodos existentes llamados `SwL3-*` en `maqueta1-1` son appliances Cisco IOU/IOL L3 (`node_type: iou`). Esto incluye los equipos de distribución/routing de los distintos sitios, aunque su nombre empiece por `Sw`.
 - `SwL3-5`: appliance Cisco IOU/IOL de capa 3 (`node_type: iou`), no IOSvL2 ni un switch multicapa físico.
 - `Switch-C-L2`: appliance QEMU con imagen IOSvL2.
 - `SwAcc-C-1`: appliance IOU/IOL usado como acceso.
@@ -209,7 +210,7 @@ Pruebas fuertes: ping permitido/bloqueado, DHCP remoto, traducción NAT, vecino 
 
 ### Appliances y topología
 
-1. ¿Qué appliance realiza el routing inter-VLAN del sitio C?
+1. ¿Qué tipo de appliance son todos los nodos `SwL3-*` de `maqueta1-1`?
 2. ¿Por qué el nombre `SwL3-5` no alcanza para afirmar que usa SVIs?
 3. ¿Qué diferencia hay entre `node_type: iou`, QEMU IOSvL2 y Dynamips Cisco 3725?
 4. Ordená el camino real desde `PC-C-Estudiantes` hasta `R-C`.
