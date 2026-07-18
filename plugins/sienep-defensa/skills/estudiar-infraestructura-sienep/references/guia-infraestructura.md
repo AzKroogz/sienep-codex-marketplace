@@ -8,6 +8,7 @@
 4. Evidencias
 5. Preguntas docentes
 6. Riesgos históricos
+7. Banco ampliado de preguntas
 
 ## Escenario
 
@@ -23,12 +24,47 @@ La defensa debe justificar disponibilidad, seguridad, segmentación y escalabili
 
 ## Núcleo obligatorio
 
+### Appliances reales y sitio C
+
+No deducir la función únicamente por el nombre mostrado en GNS3. Inventario histórico verificado:
+
+- `SwL3-5`: appliance Cisco IOU/IOL de capa 3 (`node_type: iou`), no IOSvL2 ni un switch multicapa físico.
+- `Switch-C-L2`: appliance QEMU con imagen IOSvL2.
+- `SwAcc-C-1`: appliance IOU/IOL usado como acceso.
+- `R-C`: router Cisco 3725 ejecutado por Dynamips.
+
+Camino real del estudiante del sitio C:
+
+```text
+PC-C-Estudiantes
+-> SwAcc-C-1
+-> Switch-C-L2
+-> SwL3-5 (IOU/IOL L3, router-on-a-stick)
+-> R-C (Cisco 3725)
+-> backbone OSPF
+-> sitio A
+-> red/DMZ del servidor SIENEP
+```
+
+`SwL3-5` recibe un trunk hacia el entorno de acceso y usa subinterfaces 802.1Q como gateways, por ejemplo la lógica:
+
+```text
+Ethernet0/1.20 -> VLAN Docentes
+Ethernet0/1.30 -> VLAN Estudiantes
+Ethernet0/1.60 -> VLAN Guest
+Ethernet0/1.90 -> VLAN Gestión
+```
+
+La subinterfaz tiene `encapsulation dot1Q <vlan>` y una IP de la subred. Eso constituye router-on-a-stick. No describir este sitio como routing mediante SVI salvo evidencia distinta en la configuración actual.
+
 ### Recorrido de un paquete
 
 ```text
 Host -> puerto access -> VLAN -> trunk -> SVI/gateway
 -> ACL -> routing OSPF -> backbone -> red destino
 ```
+
+Para el sitio C, sustituir `SVI/gateway` por `subinterfaz 802.1Q/gateway en SwL3-5`.
 
 Hacia Internet:
 
@@ -41,7 +77,7 @@ Host -> gateway -> ruta por defecto -> borde -> NAT/PAT -> ISP
 - Una VLAN separa dominios de broadcast.
 - Un access transporta una VLAN; un trunk transporta varias con 802.1Q.
 - Una VLAN nativa segura y no utilizada reduce riesgos de tráfico sin etiqueta.
-- El routing inter-VLAN requiere capa 3 mediante SVI, subinterfaces o router-on-a-stick.
+- El routing inter-VLAN puede hacerse mediante SVI o subinterfaces. En el sitio C auditado se hace mediante router-on-a-stick sobre el appliance IOU/IOL L3 `SwL3-5`.
 
 Comandos: `show vlan brief`, `show interfaces trunk`, `show interfaces switchport`, `show ip interface brief`.
 
@@ -168,6 +204,48 @@ Pruebas fuertes: ping permitido/bloqueado, DHCP remoto, traducción NAT, vecino 
 8. ¿Por qué DHCP necesita relay?
 9. ¿Cómo comparten Internet muchos hosts con una IP?
 10. ¿Qué demuestra un contador QoS en cero?
+
+## Banco ampliado de preguntas
+
+### Appliances y topología
+
+1. ¿Qué appliance realiza el routing inter-VLAN del sitio C?
+2. ¿Por qué el nombre `SwL3-5` no alcanza para afirmar que usa SVIs?
+3. ¿Qué diferencia hay entre `node_type: iou`, QEMU IOSvL2 y Dynamips Cisco 3725?
+4. Ordená el camino real desde `PC-C-Estudiantes` hasta `R-C`.
+5. ¿Qué función cumple `Switch-C-L2` y qué función cumple `SwL3-5`?
+6. ¿Dónde termina el dominio de capa 2 del estudiante?
+
+### Router-on-a-stick y 802.1Q
+
+7. ¿Qué problema resuelve una subinterfaz por VLAN?
+8. ¿Qué hace `encapsulation dot1Q 30`?
+9. ¿La subinterfaz tiene una MAC distinta o reutiliza la interfaz física según la plataforma?
+10. ¿Por qué la interfaz física del router-on-a-stick normalmente no recibe una IP de usuario?
+11. ¿Qué ocurriría si la VLAN 30 no estuviera permitida en un trunk intermedio?
+12. ¿Qué diferencia hay entre una subinterfaz y una SVI?
+13. ¿Qué comando usarías para demostrar que existen las subinterfaces?
+14. ¿Cómo demostrarías que `Ethernet0/1.30` funciona como gateway?
+
+### Recorrido y seguridad
+
+15. ¿En qué momento el host decide enviar el paquete al gateway?
+16. ¿Qué direcciones cambian en cada salto: MAC, IP o ambas?
+17. ¿Dónde conviene aplicar la ACL de Estudiantes y en qué dirección?
+18. ¿Por qué el acceso a una DMZ no significa acceso irrestricto?
+19. ¿Interviene NAT entre C y A? Justificá.
+20. ¿Qué tabla consulta `SwL3-5` después de aceptar el paquete?
+21. ¿Qué papel cumple `R-C` después de `SwL3-5`?
+22. ¿Cómo sabe OSPF llegar a la red del servidor?
+
+### Diagnóstico práctico
+
+23. El estudiante llega al gateway pero no al servidor: ¿qué revisarías en orden?
+24. No llega al gateway: ¿qué evidencias de VLAN/trunk/subinterfaz buscarías?
+25. La ACL muestra cero matches: ¿qué hipótesis planteás?
+26. OSPF tiene vecinos, pero no aparece la red destino: ¿qué puede faltar?
+27. El ping funciona y HTTP no: ¿qué capas o políticas revisarías?
+28. ¿Qué demostraría un traceroute que se detiene en `R-C`?
 
 ## Riesgos históricos
 
