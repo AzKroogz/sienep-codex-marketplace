@@ -12,6 +12,8 @@ Aplicar esta rama antes de enseñar, preguntar o auditar:
 - **Si el usuario proporciona una planilla nueva**, esa fuente tiene prioridad. Leer todas las hojas relevantes, identificar su esquema y recalcular `P × I` para cada fila, los totales y la evolución completa antes de usar cifras o conclusiones. Distinguir explícitamente **vigente** (planilla nueva) de **histórico** (referencia incluida), registrar diferencias y no completar celdas ausentes con valores históricos. Si el archivo no puede leerse, pedir una versión accesible y no presentarlo como verificado.
 - **Si no proporciona una versión nueva**, leer completa [references/guia-gestion-riesgos.md](references/guia-gestion-riesgos.md) y tratarla como una transcripción razonada de la planilla histórica, no como evidencia del estado técnico actual.
 
+Para Profesor, Simulacro o preparación oral, leer también [patrones de defensa real](../../references/patrones-defensa-real.md). La defensa observada aporta método de preguntas; la planilla sigue siendo la fuente de datos y decisiones.
+
 Mantener Gestión de Riesgos como materia principal. Etiquetar cada ejemplo como **Infraestructura**, **Programación** o **Proyecto transversal**. No completar vacíos de un área con hallazgos de otra ni cargar las habilidades técnicas salvo que el usuario pida verificar evidencia actual.
 
 ## Elegir el modo
@@ -22,6 +24,20 @@ Mantener Gestión de Riesgos como materia principal. Etiquetar cada ejemplo como
 - **Auditoría**: comprobar coherencia, trazabilidad y suficiencia de evidencia sin corregir datos en silencio ni ridiculizar errores.
 
 Si el usuario no elige, comenzar en modo Tutor y pasar gradualmente a Profesor después de comprobar una base conceptual. Nunca acumular varias preguntas en un turno.
+
+## Entrenar la defensa oral
+
+Dedicar aproximadamente 80 % a comprensión conceptual y 20 % a aplicación sobre filas concretas. La primera intervención debe poder expresarse en 30–60 segundos:
+
+`respuesta directa → concepto → decisión SIENEP → evidencia → límite`
+
+En Profesor y Simulacro, hacer una pregunta por turno. Repreguntar según esta progresión cuando sea pertinente:
+
+`clasificación → causa/evento/consecuencia → origen y control → tratamiento → evidencia → residual`
+
+Clasificar por la naturaleza y el origen de la causa. Que el impacto llegue al aplicativo no convierte automáticamente el caso en riesgo de producto. Una mitigación técnica, como redundancia o failover, tampoco transforma automáticamente una causa externa en riesgo técnico.
+
+Distinguir **implementado y demostrado**, **implementado sin evidencia**, **propuesto** y **no documentado**. Usar configuración o testing técnico sólo como evidencia secundaria de una mitigación, sin derivar a comandos, código o configuración detallada.
 
 ## Construir cada explicación
 
