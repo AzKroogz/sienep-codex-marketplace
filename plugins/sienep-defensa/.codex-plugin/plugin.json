@@ -1,7 +1,7 @@
 {
   "name": "sienep-defensa",
-  "version": "0.1.0+codex.20260718001424",
-  "description": "Tutor compartido para estudiar y practicar la defensa SIENEP 2026 de infraestructura y programaci\u00f3n.",
+  "version": "0.1.0+codex.20260719151215",
+  "description": "Tutor compartido para estudiar y practicar la defensa SIENEP 2026 de Infraestructura, Programaci\u00f3n y Gesti\u00f3n de Riesgos.",
   "author": {
     "name": "Equipo SIENEP",
     "url": "https://github.com/AzKroogz"
@@ -12,13 +12,14 @@
     "utec",
     "gns3",
     "spring-boot",
+    "gestion-de-riesgos",
     "defensa"
   ],
   "skills": "./skills/",
   "interface": {
     "displayName": "Defensa SIENEP 2026",
-    "shortDescription": "Tutor de infraestructura y programaci\u00f3n SIENEP.",
-    "longDescription": "Ayuda al equipo a comprender, demostrar y defender la infraestructura GNS3 y el backend Spring Boot de SIENEP 2026.",
+    "shortDescription": "Infraestructura, Programaci\u00f3n y Riesgos SIENEP.",
+    "longDescription": "Ayuda al equipo a comprender, demostrar y defender Infraestructura, Programaci\u00f3n y Gesti\u00f3n de Riesgos de SIENEP 2026.",
     "developerName": "Equipo SIENEP",
     "category": "Education",
     "capabilities": [
@@ -27,7 +28,7 @@
     "defaultPrompt": [
       "Examiname sobre infraestructura SIENEP.",
       "Ense\u00f1ame la defensa del backend SIENEP.",
-      "Hagamos un simulacro 70% infra y 30% programaci\u00f3n."
+      "Ense\u00f1ame Gesti\u00f3n de Riesgos desde cero usando nuestra planilla."
     ]
   }
 }
