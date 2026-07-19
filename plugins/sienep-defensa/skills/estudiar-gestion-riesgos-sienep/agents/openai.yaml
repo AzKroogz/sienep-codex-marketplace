@@ -1,0 +1,4 @@
+interface:
+  display_name: "Estudiar Gestión de Riesgos SIENEP"
+  short_description: "Prepara la defensa de gestión de riesgos"
+  default_prompt: "Usa $estudiar-gestion-riesgos-sienep para enseñarme desde cero y examinarme sobre la planilla de riesgos SIENEP."
