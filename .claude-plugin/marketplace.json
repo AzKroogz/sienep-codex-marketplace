@@ -1,0 +1,15 @@
+{
+  "name": "sienep-equipo",
+  "owner": { "name": "Equipo SIENEP" },
+  "metadata": {
+    "description": "Plugins del equipo SIENEP 2026.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "sienep-frontend",
+      "source": "./plugins/sienep-frontend",
+      "description": "Construir el frontend SIENEP con la estructura acordada."
+    }
+  ]
+}

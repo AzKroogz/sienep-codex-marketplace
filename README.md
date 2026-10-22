@@ -66,6 +66,26 @@ codex plugin list
 
 Si la versión no cambia, comprobar que el `git pull` se ejecutó en el mismo directorio mostrado por `codex plugin marketplace list`.
 
+## Plugin `sienep-frontend` (construir el frontend)
+
+Contiene el skill `$construir-frontend-sienep`, que impone la estructura del frontend (página → `lib/<modulo>.ts` → `solicitarJson`/`ErrorApi`), la lista cerrada de herramientas permitidas, el flujo de mostrar el diff antes de aplicar y el registro de decisiones para la defensa.
+
+Con Codex:
+
+```bash
+codex plugin marketplace add AzKroogz/sienep-codex-marketplace --ref main
+codex plugin add sienep-frontend@sienep-equipo
+```
+
+Con Claude Code (dentro de una sesión):
+
+```text
+/plugin marketplace add AzKroogz/sienep-codex-marketplace
+/plugin install sienep-frontend@sienep-equipo
+```
+
+Para actualizar, en Codex repetir `codex plugin marketplace upgrade sienep-equipo` y `codex plugin add sienep-frontend@sienep-equipo`; en Claude Code, `/plugin marketplace update sienep-equipo`. En los dos casos, abrir una sesión nueva.
+
 ## Ejemplos
 
 ```text

@@ -1,0 +1,7 @@
+{
+  "name": "sienep-frontend",
+  "version": "0.1.0",
+  "description": "Guía para construir el frontend SIENEP 2026 con una sola estructura: página, servicio en lib/, solicitarJson y ErrorApi.",
+  "author": { "name": "Equipo SIENEP" },
+  "keywords": ["sienep", "utec", "nextjs", "frontend", "reestructura"]
+}
