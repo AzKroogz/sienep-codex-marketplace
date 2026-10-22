@@ -1,0 +1,4 @@
+interface:
+  display_name: "Construir Frontend SIENEP"
+  short_description: "Cambios del frontend con la estructura acordada"
+  default_prompt: "Usa $construir-frontend-sienep para migrar o crear una pantalla del frontend SIENEP siguiendo su estructura."

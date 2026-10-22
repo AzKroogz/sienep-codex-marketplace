@@ -1,0 +1,32 @@
+{
+  "name": "sienep-frontend",
+  "version": "0.1.0+codex.20261021205620",
+  "description": "Guía para construir el frontend SIENEP 2026 con una sola estructura: página, servicio en lib/, solicitarJson y ErrorApi.",
+  "author": {
+    "name": "Equipo SIENEP",
+    "url": "https://github.com/AzKroogz"
+  },
+  "repository": "https://github.com/AzKroogz/sienep-codex-marketplace",
+  "keywords": [
+    "sienep",
+    "utec",
+    "nextjs",
+    "frontend",
+    "reestructura"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Frontend SIENEP 2026",
+    "shortDescription": "Construir el frontend SIENEP con la estructura acordada.",
+    "longDescription": "Impone la estructura del frontend (página → lib/<modulo>.ts → solicitarJson/ErrorApi), las herramientas permitidas, el flujo de diff antes de aplicar y el registro de decisiones para la defensa.",
+    "developerName": "Equipo SIENEP",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive"
+    ],
+    "defaultPrompt": [
+      "Migrá la pantalla de usuarios a la capa de servicios.",
+      "Creá la pantalla de categorías siguiendo la estructura del frontend."
+    ]
+  }
+}
