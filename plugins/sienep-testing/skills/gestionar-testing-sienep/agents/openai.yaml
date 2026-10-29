@@ -1,0 +1,4 @@
+interface:
+  display_name: "Testing SIENEP"
+  short_description: "Casos, planillas y TestLink del testing SIENEP"
+  default_prompt: "Usa $gestionar-testing-sienep para revisar qué falta del testing SIENEP o para crear y corregir casos en TestLink según el programa real."

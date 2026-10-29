@@ -1,0 +1,7 @@
+{
+  "name": "sienep-testing",
+  "version": "0.1.0",
+  "description": "Guía del testing SIENEP 2026: letra del área, comportamiento real del programa, operación de TestLink, planillas de técnicas y estado del trabajo.",
+  "author": { "name": "Equipo SIENEP" },
+  "keywords": ["sienep", "utec", "testing", "testlink", "mantis"]
+}
