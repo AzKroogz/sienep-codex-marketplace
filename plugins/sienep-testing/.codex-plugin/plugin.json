@@ -1,0 +1,32 @@
+{
+  "name": "sienep-testing",
+  "version": "0.1.0+codex.20261028220859",
+  "description": "Guía del testing SIENEP 2026: letra del área, comportamiento real del programa, operación de TestLink, planillas de técnicas y estado del trabajo.",
+  "author": {
+    "name": "Equipo SIENEP",
+    "url": "https://github.com/AzKroogz"
+  },
+  "repository": "https://github.com/AzKroogz/sienep-codex-marketplace",
+  "keywords": [
+    "sienep",
+    "utec",
+    "testing",
+    "testlink",
+    "mantis"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Testing SIENEP 2026",
+    "shortDescription": "Casos, planillas y TestLink del testing SIENEP.",
+    "longDescription": "Reúne lo que pide la letra de Testing, el comportamiento real del programa para escribir y auditar casos, cómo crear, corregir y versionar casos en TestLink, el formato de las planillas de técnicas y el estado del trabajo.",
+    "developerName": "Equipo SIENEP",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive"
+    ],
+    "defaultPrompt": [
+      "¿Qué nos falta para cumplir la letra de testing?",
+      "Revisá los casos del módulo de recordatorios contra el programa real."
+    ]
+  }
+}

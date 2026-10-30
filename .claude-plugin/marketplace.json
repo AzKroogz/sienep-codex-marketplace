@@ -10,6 +10,11 @@
       "name": "sienep-frontend",
       "source": "./plugins/sienep-frontend",
       "description": "Construir el frontend SIENEP con la estructura acordada."
+    },
+    {
+      "name": "sienep-testing",
+      "source": "./plugins/sienep-testing",
+      "description": "Testing SIENEP: casos, planillas y TestLink según el programa real."
     }
   ]
 }

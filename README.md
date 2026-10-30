@@ -86,6 +86,26 @@ Con Claude Code (dentro de una sesión):
 
 Para actualizar, en Codex repetir `codex plugin marketplace upgrade sienep-equipo` y `codex plugin add sienep-frontend@sienep-equipo`; en Claude Code, `/plugin marketplace update sienep-equipo`. En los dos casos, abrir una sesión nueva.
 
+## Plugin `sienep-testing` (testing del proyecto)
+
+Contiene el skill `$gestionar-testing-sienep`: lo que pide la letra del área de Testing, el comportamiento real del programa para escribir y auditar casos, cómo crear, corregir y versionar casos en TestLink (versión nueva en Final y anterior en Obsoleto), el formato de las planillas de técnicas (clases de equivalencia, valores límite, tablas de decisión) y el estado del trabajo.
+
+Con Codex:
+
+```bash
+codex plugin marketplace add AzKroogz/sienep-codex-marketplace --ref main
+codex plugin add sienep-testing@sienep-equipo
+```
+
+Con Claude Code (dentro de una sesión):
+
+```text
+/plugin marketplace add AzKroogz/sienep-codex-marketplace
+/plugin install sienep-testing@sienep-equipo
+```
+
+Se actualiza igual que `sienep-frontend`. El archivo `references/estado-testing.md` es el checkpoint del trabajo: actualizarlo cuando cambie el estado.
+
 ## Ejemplos
 
 ```text
