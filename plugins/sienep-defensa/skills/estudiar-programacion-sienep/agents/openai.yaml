@@ -1,4 +1,4 @@
 interface:
   display_name: "Estudiar Programacion SIENEP"
-  short_description: "Prepara la defensa del backend SIENEP"
+  short_description: "Prepara la defensa de Programacion SIENEP (back y front)"
   default_prompt: "Usa $estudiar-programacion-sienep para examinarme y enseñarme la defensa del backend SIENEP."

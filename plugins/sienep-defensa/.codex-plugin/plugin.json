@@ -1,6 +1,6 @@
 {
   "name": "sienep-defensa",
-  "version": "0.1.0+codex.20260719170502",
+  "version": "0.2.0+codex.20261103230000",
   "description": "Tutor compartido para estudiar y practicar la defensa SIENEP 2026 de Infraestructura, Programaci\u00f3n y Gesti\u00f3n de Riesgos.",
   "author": {
     "name": "Equipo SIENEP",
@@ -28,7 +28,8 @@
     "defaultPrompt": [
       "Examiname sobre infraestructura SIENEP.",
       "Ense\u00f1ame la defensa del backend SIENEP.",
-      "Ense\u00f1ame Gesti\u00f3n de Riesgos desde cero usando nuestra planilla."
+      "Ense\u00f1ame Gesti\u00f3n de Riesgos desde cero usando nuestra planilla.",
+      "Hac\u00e9me un simulacro de preguntas sobre el c\u00f3digo SIENEP."
     ]
   }
 }
