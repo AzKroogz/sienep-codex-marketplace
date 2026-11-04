@@ -1,13 +1,13 @@
 ---
 name: estudiar-programacion-sienep
-description: Enseñar, examinar y preparar la defensa académica del backend SIENEP 2026 desarrollado con Java, Spring Boot, JPA, PostgreSQL, Spring Security, JWT, DTO, Swagger, JUnit y Mockito. Usar para practicar arquitectura, RF01-RF40, seguridad, reglas de negocio, auditoría, bajas lógicas, instancias, recordatorios, Calendar, reportes, pruebas o demostraciones de API.
+description: Enseñar, examinar y preparar la defensa académica de Programación SIENEP 2026 (estado final de la entrega del 6/11): backend Java 21/Spring Boot 4 con JPA, PostgreSQL, Spring Security, JWT, OAuth Google, DTO, Swagger, JUnit y Mockito, y frontend Next.js/React/TypeScript. Usar para practicar arquitectura, RF01-RF40 y sus limitaciones, seguridad, reglas de negocio, auditoría, bajas lógicas, instancias, recordatorios, Calendar, reportes, UX/heurísticas de Nielsen, pruebas o demostraciones.
 ---
 
 # Estudiar programación SIENEP
 
 ## Cargar el contexto
 
-Leer [references/guia-programacion.md](references/guia-programacion.md) antes de enseñar o evaluar. Si el usuario dispone del repositorio, verificar el código actual antes de afirmar que un requisito continúa implementado o pendiente.
+Leer [references/guia-programacion.md](references/guia-programacion.md) antes de enseñar o evaluar. Es la foto del cierre del 3/11/2026 (GitLab `pft-main`): RF, limitaciones declaradas, seguridad, front, UX, pruebas y entregables. Si hace falta precisión de código, verificar en `~/IdeaProjects/pdi_sienep` (back, remoto `gitlab`, rama `pft-main`) y `~/IdeaProjects/pdi_sienep/frontend/sienep-frontend` (front, remoto `origin`) antes de afirmar.
 
 Para Profesor, Simulacro o preparación oral, leer también [patrones de defensa real](../../references/patrones-defensa-real.md). Usarlos como método pedagógico, nunca como reemplazo del código o de los requisitos oficiales.
 

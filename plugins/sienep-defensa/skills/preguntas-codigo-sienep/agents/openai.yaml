@@ -1,0 +1,4 @@
+interface:
+  display_name: "Preguntas de codigo SIENEP"
+  short_description: "Simulacro de preguntas sobre el codigo de Programacion SIENEP"
+  default_prompt: "Usa $preguntas-codigo-sienep para hacerme un simulacro de preguntas sobre el codigo SIENEP."

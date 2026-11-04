@@ -6,6 +6,7 @@ Incluye el plugin `sienep-defensa` con los skills:
 
 - `$estudiar-infraestructura-sienep`
 - `$estudiar-programacion-sienep`
+- `$preguntas-codigo-sienep`: banco de preguntas de defensa sobre el código (back y front), con respuesta modelo, ubicación en el código, repreguntas y trampas.
 - `$estudiar-gestion-riesgos-sienep`
 
 El material resume conocimiento producido por el equipo. No incluye credenciales, tokens, proyectos portables, imágenes propietarias ni los PDF originales de la consigna.
